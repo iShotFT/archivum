@@ -107,7 +107,7 @@ Most images are from `lscr.io/linuxserver` and locked to the latest version, whi
 
 The following software is required, some of the services cost money (the usenet related services), the total yearly cost if you go for the full configuration (two usenet indexers and two usenet downloaders for optimal speed) is 177 USD / year (27 USD for indexers, 90 USD for downloaders). The minimal recommended configuration would cost 72 USD / year (1 indexer, 1 downloader), alternatively you can ignore all the usenet stuff and run completely for free by only using deluge / torrents, although this will diminish the ease of access to content.
 
-| **Landlubber**                | **Archivum (Full)**     | **Archivum (Frugal)**  | **Archivum (Free)**             |
+| **Landlubber** (*aka non-pirate way*)               | **Archivum (Full)**     | **Archivum (Frugal)**  | **Archivum (Free)**             |
 |------------------------------|-------------------------|------------------------|----------------------------------|
 | Netflix (Standard): €161.88/year  | Indexers (2): $27/year     | Indexer (1): $12/year    | Deluge/Torrents: Free            |
 | Amazon Prime: €49/year       | Downloaders (2): $90/year | Downloader (1): $60/year | Deluge/Torrents: Free            |
