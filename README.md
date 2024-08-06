@@ -235,6 +235,9 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 - Generate a random, human readable password:
   - `make hash.human`
 
+[newshosting-url]: https://www.newshosting.com/
+[frugelusenet-url]: https://frugalusenet.com/
+[NZBGeek-url]: https://nzbgeek.info/
 [WSL2-url]: https://learn.microsoft.com/en-us/windows/wsl/install
 [Direnv-url]: https://direnv.net/
 [Docker-Install-Ubuntu-url]: https://docs.docker.com/engine/install/ubuntu/#installation-methods
