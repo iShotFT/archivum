@@ -109,6 +109,7 @@ services:
       - archivum
   ombi:
     image: lscr.io/linuxserver/ombi:latest
+    command: ["--host=my_host"]
     hostname: ombi
     container_name: ombi
     environment:
@@ -116,7 +117,7 @@ services:
       - PGID=1000
       - TZ=Europe/Brussels
     ports:
-      - 3579:3579
+      - 38085:3579
     volumes:
       - ombi_config:/config
       - downloads_complete:/downloads_complete

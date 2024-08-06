@@ -18,3 +18,9 @@ mount:
 
 symlink:
 	ln -s /mnt/d/Archivum storage/downloads/complete
+
+hash.strong:
+	openssl rand -base64 45 | head -c 30; echo
+
+hash.human:
+	< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c 16; echo
