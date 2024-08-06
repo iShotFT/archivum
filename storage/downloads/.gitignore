@@ -1,0 +1,12 @@
+*
+!.gitignore
+!complete
+!incomplete
+!torrents
+!categories
+!categories/couchpotato
+!categories/headphones
+!categories/sonarr
+!categories/prowlarr
+!categories/radarr
+!incomplete/couchpotato

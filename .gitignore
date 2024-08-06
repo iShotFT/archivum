@@ -1,0 +1,5 @@
+.env
+storage/proxy/data/*
+storage/proxy/letsencrypt/*
+!storage/proxy/data
+!storage/proxy/letsencrypt
