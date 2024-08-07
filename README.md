@@ -70,6 +70,8 @@
 
 **This project is not yet finished, it is missing scripts to automatically configure all services based on your .env file.**
 
+**The gluetun / VPN integration is currently separated but is in progress of being merged with the main configuration**
+
 ## About The Project
 
 Pronunciation: `/ɑːrˈkɪvʊm/`

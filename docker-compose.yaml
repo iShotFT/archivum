@@ -243,7 +243,40 @@ services:
     networks:
       - archivum
 
+  gluetun:
+    image: qmcgaw/gluetun
+    hostname: gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    # ports:
+    #   - 3579:3579/tcp # Ombi Server
+    #   - 32400:32400/tcp # Plex Media Server
+    volumes:
+      - gluetun_config:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=${OPENVPN_PROVIDER}
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Germany
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - UPDATER_PERIOD=24h
+    restart: unless-stopped
+    networks:
+      - archivum
+
 volumes:
+  gluetun_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/gluetun/config
   sabnzbd_config:
     driver: local
     driver_opts:
