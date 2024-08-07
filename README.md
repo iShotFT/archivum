@@ -186,7 +186,10 @@ With the current configuration, Archivum will write the completed content to a l
 
 ### Ports
 
-To obfuscate the purpose of this media server a little bit, we've chosen to deviate from the default ports used by these services. Here are the port mappings being used:
+To obfuscate the purpose of this media server a little bit, we've chosen to deviate from the default ports used by these services.
+Only the plex container is exposed to the host machine (and due to the network being bridge, the world wide web), all other machines are only accessible through the nginx reverse proxy.
+
+Here are the port mappings being used:
 
 - sabnzbd
   - Configured port: 38080 (default is 8080)
@@ -199,18 +202,20 @@ To obfuscate the purpose of this media server a little bit, we've chosen to devi
   - Configured port: 38083 (default is 7878)
 - prowlarr
   - Configured port: 38084 (default is 9696)
-- ombi
-  - Configured port: 38085 (default is 3579)
+- overseerr
+  - Configured port: 38085 (default is 5055)
 - plex
   - Configured port: *unchanged* (default is 32400)
 - heimdall
-  - Configured port:  
+  - Configured port: *unchanged* (default is 80/443)
+- tautulli
+  - Configured port: 38086
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
 #### Port forwarding
 
-Without changing any configuration files, you only need to expose port 80 and 443 on your router to access services over the internet. If you don't plan to ever access the media server remotely, we recommend keeping these ports closed.
+Without changing any configuration files, you only need to **forward** **port 80** and **port 443** on your router to access services over the internet. If you don't plan to ever access the media server remotely, we recommend keeping these ports closed.
 We are forcing HTTPS connections so the 80 port is purely to catch unprotected requests and forward them to 443.
 
 ## Commands Cheatsheet
