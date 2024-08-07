@@ -70,8 +70,6 @@
 
 **This project is not yet finished, it is missing scripts to automatically configure all services based on your .env file.**
 
-**The gluetun / VPN integration is currently separated but is in progress of being merged with the main configuration**
-
 ## About The Project
 
 Pronunciation: `/ɑːrˈkɪvʊm/`
@@ -90,8 +88,8 @@ Archivum serves as a fully featured pirating media server, providing users with 
   - Deluge is a lightweight, Free Software, cross-platform BitTorrent client. It is designed to run as both a normal standalone desktop application and as a client-server.
 - [![Nginx][Nginx]][Nginx-url]
   - Nginx Proxy Manager is a tool for managing proxy hosts, redirections, and access lists. It simplifies the management of reverse proxy settings for your services.
-- [![Heimdall][Heimdall]][Heimdall-url]
-  - Heimdall is an application dashboard that helps you keep track of your installed services and apps. It provides a centralized interface to access all your web services.
+- [![Homarr][Homarr]][Homarr-url]
+  - Homarr is a sleek and customizable dashboard for managing your web services. It provides a centralized interface to access all your web applications.
 - [![DDNS-Updater][DDNS-Updater]][DDNS-Updater-url]
   - DDNS-Updater is a dynamic DNS updater with support for multiple DNS services. It allows you to update your IP address and create subdomains for your home or office network.
 - [![Plex][Plex]][Plex-url]
@@ -104,6 +102,9 @@ Archivum serves as a fully featured pirating media server, providing users with 
   - Sabnzbd is an Open Source Binary Newsreader written in Python. It simplifies the process of downloading from Usenet by automating the process of downloading, verifying, and extracting files.
 - [![Tautulli][Tautulli]][Tautulli-url]
   - Tautulli is a monitoring and tracking tool for Plex Media Server. It provides detailed statistics and reports on your Plex usage and activity.
+- [![Gluetun][Gluetun]][Gluetun-url]
+  - Gluetun is a VPN client in a lightweight Docker container, it aims to be secure, fast, and reliable with all VPN providers.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -267,8 +268,8 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 [Deluge-url]: https://deluge-torrent.org/
 [Nginx]: https://img.shields.io/badge/Nginx-269539?style=for-the-badge&logo=nginx&logoColor=white
 [Nginx-url]: https://nginx.org/
-[Heimdall]: https://img.shields.io/badge/Heimdall-3D3D3D?style=for-the-badge&logo=heimdall&logoColor=white
-[Heimdall-url]: https://heimdall.site/
+[Homarr]: https://img.shields.io/badge/Homarr-3D3D3D?style=for-the-badge&logo=homarr&logoColor=white
+[Homarr-url]: https://github.com/ajnart/homarr
 [DDNS-Updater]: https://img.shields.io/badge/DDNS--Updater-000000?style=for-the-badge&logo=ddns-updater&logoColor=white
 [DDNS-Updater-url]: https://github.com/qdm12/ddns-updater
 [Plex]: https://img.shields.io/badge/Plex-E5A00D?style=for-the-badge&logo=plex&logoColor=white
@@ -281,3 +282,5 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 [Sabnzbd-url]: https://sabnzbd.org/
 [Tautulli]: https://img.shields.io/badge/Tautulli-00A9E0?style=for-the-badge&logo=tautulli&logoColor=white
 [Tautulli-url]: https://tautulli.com/
+[Gluetun]: https://img.shields.io/badge/Gluetun-00A9E0?style=for-the-badge&logo=gluetun&logoColor=white
+[Gluetun-url]: https://github.com/qdm12/gluetun

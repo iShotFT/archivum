@@ -2,7 +2,6 @@ name: 'archivum'
 services:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
-    hostname: sabnzbd
     container_name: sabnzbd
     environment:
       - PUID=${PUID}
@@ -13,15 +12,11 @@ services:
       - downloads:/downloads
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    expose:
-      - 38080
     restart: unless-stopped
-    networks:
-      - archivum
+    network_mode: "service:gluetun"
 
   deluge:
     image: lscr.io/linuxserver/deluge:latest
-    hostname: deluge
     container_name: deluge
     environment:
       - PUID=${PUID}
@@ -33,14 +28,8 @@ services:
       - downloads:/downloads
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 6881:6881
-      - 6881:6881/udp
-    expose:
-      - 38081
     restart: unless-stopped
-    networks:
-      - archivum
+    network_mode: "service:gluetun"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:38081"]
       interval: 30s
@@ -156,8 +145,8 @@ services:
       - plex_config:/config
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    expose:
-      - 32400
+    ports:
+      - 32400:32400
     restart: unless-stopped
     networks:
       - archivum
@@ -178,19 +167,17 @@ services:
     networks:
       - archivum
 
-  heimdall:
-    image: lscr.io/linuxserver/heimdall:latest
-    hostname: heimdall
-    container_name: heimdall
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TIMEZONE}
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    hostname: homarr
+    container_name: homarr
     volumes:
-      - heimdall_config:/config
-    expose:
-      - 80
-      - 443
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - homarr_config:/app/data/configs
+      - homarr_icons:/app/public/icons
+      - homarr_data:/data
+    ports:
+      - 7575:7575
     restart: unless-stopped
     networks:
       - archivum
@@ -251,9 +238,11 @@ services:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
-    # ports:
-    #   - 3579:3579/tcp # Ombi Server
-    #   - 32400:32400/tcp # Plex Media Server
+    ports:
+      - 38080:38080/tcp # nzb
+      - 38081:38081/tcp # deluge
+      - 6881:6881 # deluge
+      - 6881:6881/udp # deluge
     volumes:
       - gluetun_config:/gluetun
     environment:
@@ -331,12 +320,24 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/storage/prowlarr/config
-  heimdall_config:
+  homarr_config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/storage/heimdall/config
+      device: ${PWD}/storage/homarr/configs
+  homarr_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/homarr/data
+  homarr_icons:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/homarr/icons
   ddns_config:
     driver: local
     driver_opts:
