@@ -1,4 +1,5 @@
 .env
+creds.txt
 storage/proxy/data/*
 storage/proxy/letsencrypt/*
 !storage/proxy/data
