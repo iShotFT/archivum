@@ -5,16 +5,16 @@ services:
     hostname: sabnzbd
     container_name: sabnzbd
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
       - sabnzbd_config:/config
       - downloads:/downloads
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 38080:38080
+    expose:
+      - 38080
     restart: unless-stopped
     networks:
       - archivum
@@ -24,8 +24,8 @@ services:
     hostname: deluge
     container_name: deluge
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
       - DELUGE_LOGLEVEL=info
     volumes:
@@ -36,7 +36,8 @@ services:
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 38081:38081
+    expose:
+      - 38081
     restart: unless-stopped
     networks:
       - archivum
@@ -51,16 +52,16 @@ services:
     hostname: sonarr
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
       - sonarr_config:/config
       - downloads:/downloads
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 38082:38082
+    expose:
+      - 38082
     restart: unless-stopped
     networks:
       - archivum
@@ -75,16 +76,16 @@ services:
     hostname: radarr
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
       - radarr_config:/config
       - downloads:/downloads
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 38083:38083
+    expose:
+      - 38083
     restart: unless-stopped
     networks:
       - archivum
@@ -99,33 +100,35 @@ services:
     hostname: prowlarr
     container_name: prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
       - prowlarr_config:/config
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 38084:38084
+    expose:
+      - 38084
     restart: unless-stopped
     networks:
       - archivum
 
-  ombi:
-    image: lscr.io/linuxserver/ombi:latest
-    hostname: ombi
-    container_name: ombi
+  overseerr:
+    image: sctx/overseerr:latest
+    hostname: overseerr
+    container_name: overseerr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - LOG_LEVEL=debug
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
+      - PORT=38085
+    expose:
+      - 38085
     volumes:
-      - ombi_config:/config
+      - overseerr_config:/app/config
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
-    ports:
-      - 38085:3579
     restart: unless-stopped
     networks:
       - archivum
@@ -144,64 +147,98 @@ services:
     env_file:
       - ./.env
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - plex_config:/config
       - downloads_complete:/downloads_complete
-    ports:
-      - 32400:32400
+      - hetzner_storage_share:/hetzner-storage
+    expose:
+      - 32400
     restart: unless-stopped
     networks:
       - archivum
 
-  duckdns:
-    image: lscr.io/linuxserver/duckdns:latest
-    hostname: duckdns
-    container_name: duckdns
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    hostname: tautulli
+    container_name: tautulli
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
-      - SUBDOMAINS=helakker,helakker-plex
-      - TOKEN=${DUCKDNS_TOKEN}
-      - UPDATE_IP=ipv4
-      - LOG_FILE=false
     volumes:
-      - duckdns_config:/config
+      - tautulli_config:/config
+    expose:
+      - 8181
     restart: unless-stopped
     networks:
       - archivum
 
-  # proxy:
-  #   image: 'jc21/nginx-proxy-manager:latest'
-  #   hostname: proxy
-  #   container_name: proxy
-  #   volumes:
-  #     - proxy_data:/data
-  #     - proxy_letsencrypt:/etc/letsencrypt
-  #   ports:
-  #     - '80:80'
-  #     - '81:81'
-  #     - '443:443'
-  #   restart: unless-stopped
-  #   networks:
-  #     - archivum
-
-  organizr:
-    image: 'organizr/organizr:latest'
-    container_name: organizr
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    hostname: heimdall
+    container_name: heimdall
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TIMEZONE}
-    ports:
-      - '38086:80'
     volumes:
-      - organizr_config:/config
+      - heimdall_config:/config
+    expose:
+      - 80
+      - 443
+    restart: unless-stopped
+    networks:
+      - archivum
+
+  ddns:
+    image: qmcgaw/ddns-updater
+    hostname: ddns
+    container_name: ddns
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - DATADIR=/updater/data
+      - PERIOD=5m
+      - UPDATE_COOLDOWN_PERIOD=5m
+      - PUBLICIP_FETCHERS=all
+      - PUBLICIP_HTTP_PROVIDERS=all
+      - PUBLICIPV4_HTTP_PROVIDERS=all
+      - PUBLICIPV6_HTTP_PROVIDERS=all
+      - PUBLICIP_DNS_PROVIDERS=all
+      - PUBLICIP_DNS_TIMEOUT=3s
+      - HTTP_TIMEOUT=10s
+      - LISTENING_ADDRESS=:8000
+      - ROOT_URL=/
+      - BACKUP_PERIOD=0
+      - BACKUP_DIRECTORY=/updater/data
+      - LOG_LEVEL=info
+      - LOG_CALLER=hidden
+      - SHOUTRRR_ADDRESSES=
+    volumes:
+      - ddns_config:/updater/data
+    expose:
+      - 8000
+    restart: unless-stopped
+    networks:
+      - archivum
+
+  proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    hostname: proxy
+    container_name: proxy
+    volumes:
+      - proxy_data:/data
+      - proxy_letsencrypt:/etc/letsencrypt
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
     restart: unless-stopped
     networks:
       - archivum
@@ -249,18 +286,36 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/storage/plex/config
+  tautulli_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/tautulli/config
   prowlarr_config:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ${PWD}/storage/prowlarr/config
-  ombi_config:
+  heimdall_config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/storage/ombi/config
+      device: ${PWD}/storage/heimdall/config
+  ddns_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/ddns/config
+  overseerr_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/overseerr/config
   proxy_data:
     driver: local
     driver_opts:
@@ -273,18 +328,6 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/storage/proxy/letsencrypt
-  duckdns_config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${PWD}/storage/duckdns/config
-  organizr_config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${PWD}/storage/organizr/config
   hetzner_storage_share:
     driver_opts:
       type: cifs

@@ -88,20 +88,20 @@ Archivum serves as a fully featured pirating media server, providing users with 
   - Deluge is a lightweight, Free Software, cross-platform BitTorrent client. It is designed to run as both a normal standalone desktop application and as a client-server.
 - [![Nginx][Nginx]][Nginx-url]
   - Nginx Proxy Manager is a tool for managing proxy hosts, redirections, and access lists. It simplifies the management of reverse proxy settings for your services.
-- [![Organizr][Organizr]][Organizr-url]
-  - Organizr is a tool that allows you to organize your services. It serves as a single access point to all your web services and applications.
-- [![Duckdns][Duckdns]][Duckdns-url]
-  - DuckDNS is a free dynamic DNS service that allows you to update your IP address and create subdomains for your home or office network.
+- [![Heimdall][Heimdall]][Heimdall-url]
+  - Heimdall is an application dashboard that helps you keep track of your installed services and apps. It provides a centralized interface to access all your web services.
+- [![DDNS-Updater][DDNS-Updater]][DDNS-Updater-url]
+  - DDNS-Updater is a dynamic DNS updater with support for multiple DNS services. It allows you to update your IP address and create subdomains for your home or office network.
 - [![Plex][Plex]][Plex-url]
   - Plex is a media server that organizes your media library and streams it to any device. It provides a comprehensive solution for managing and accessing your media collection.
-- [![Ombi][Ombi]][Ombi-url]
-  - Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves.
+- [![Overseerr][Overseerr]][Overseerr-url]
+  - Overseerr is a request management and media discovery tool for your media server. It allows your shared Plex or Emby users to request new content easily.
 - [![Prowlarr][Prowlarr]][Prowlarr-url]
   - Prowlarr is an indexer manager/proxy built on the popular Sonarr/Radarr applications. It integrates seamlessly with your existing media management software.
 - [![Sabnzbd][Sabnzbd]][Sabnzbd-url]
   - Sabnzbd is an Open Source Binary Newsreader written in Python. It simplifies the process of downloading from Usenet by automating the process of downloading, verifying, and extracting files.
-
-Most images are from `lscr.io/linuxserver` and locked to the latest version, which means this stack will automatically stay up-to-date with the latest versions of the images.
+- [![Tautulli][Tautulli]][Tautulli-url]
+  - Tautulli is a monitoring and tracking tool for Plex Media Server. It provides detailed statistics and reports on your Plex usage and activity.
 
 ### Yearly Cost
 
@@ -199,8 +199,8 @@ To obfuscate the purpose of this media server a little bit, we've chosen to devi
   - Configured port: 38085 (default is 3579)
 - plex
   - Configured port: *unchanged* (default is 32400)
-- organizr
-  - Configured port: 38086 (default is 80)
+- heimdall
+  - Configured port:  
   
 #### Port forwarding
 
@@ -252,15 +252,17 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 [Deluge-url]: https://deluge-torrent.org/
 [Nginx]: https://img.shields.io/badge/Nginx-269539?style=for-the-badge&logo=nginx&logoColor=white
 [Nginx-url]: https://nginx.org/
-[Organizr]: https://img.shields.io/badge/Organizr-3D3D3D?style=for-the-badge&logo=organizr&logoColor=white
-[Organizr-url]: https://organizr.app/
-[Duckdns]: https://img.shields.io/badge/Duckdns-9FE9C8?style=for-the-badge&logo=duckdns&logoColor=black
-[Duckdns-url]: https://www.duckdns.org/
+[Heimdall]: https://img.shields.io/badge/Heimdall-3D3D3D?style=for-the-badge&logo=heimdall&logoColor=white
+[Heimdall-url]: https://heimdall.site/
+[DDNS-Updater]: https://img.shields.io/badge/DDNS--Updater-000000?style=for-the-badge&logo=ddns-updater&logoColor=white
+[DDNS-Updater-url]: https://github.com/qdm12/ddns-updater
 [Plex]: https://img.shields.io/badge/Plex-E5A00D?style=for-the-badge&logo=plex&logoColor=white
 [Plex-url]: https://www.plex.tv/
-[Ombi]: https://img.shields.io/badge/Ombi-000000?style=for-the-badge&logo=ombi&logoColor=white
-[Ombi-url]: https://ombi.io/
+[Overseerr]: https://img.shields.io/badge/Overseerr-5A67D8?style=for-the-badge&logo=overseerr&logoColor=white
+[Overseerr-url]: https://overseerr.dev/
 [Prowlarr]: https://img.shields.io/badge/Prowlarr-FF5E5B?style=for-the-badge&logo=prowlarr&logoColor=white
 [Prowlarr-url]: https://prowlarr.com/
 [Sabnzbd]: https://img.shields.io/badge/Sabnzbd-F29111?style=for-the-badge&logo=sabnzbd&logoColor=white
 [Sabnzbd-url]: https://sabnzbd.org/
+[Tautulli]: https://img.shields.io/badge/Tautulli-00A9E0?style=for-the-badge&logo=tautulli&logoColor=white
+[Tautulli-url]: https://tautulli.com/
