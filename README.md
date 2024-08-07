@@ -178,7 +178,7 @@ With the current configuration, Archivum will write the completed content to a l
 
 #### Network drives (CIFS)
 
-- Look at the example in [docker-compose.yaml](docker-compose.yaml#290) file, at the bottom, "hetzner_storage_share", this is a mounted network drive from [Hetzner Robot][Hetzner-Robot-Storage]
+- Look at the example in [docker-compose.yaml](docker-compose.yaml#L331) file, at the bottom, "hetzner_storage_share", this is a mounted network drive from [Hetzner Robot][Hetzner-Robot-Storage]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -232,7 +232,7 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 - Enforce correct file system permissions:
   - `make perm`
 
-- Mount the 'D'-drive from Windows host to your WSL2 instance: (change the drive letter as needed [here](Makefile#16))
+- Mount the 'D'-drive from Windows host to your WSL2 instance: (change the drive letter as needed [here](Makefile#L16))
   - `make mount`
   
 - Generate a strong hashing password and print into console:
