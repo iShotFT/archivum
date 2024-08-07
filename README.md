@@ -103,6 +103,8 @@ Archivum serves as a fully featured pirating media server, providing users with 
 - [![Tautulli][Tautulli]][Tautulli-url]
   - Tautulli is a monitoring and tracking tool for Plex Media Server. It provides detailed statistics and reports on your Plex usage and activity.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Yearly Cost
 
 The following software is required, some of the services cost money (the usenet related services), the total yearly cost if you go for the full configuration (two usenet indexers and two usenet downloaders for optimal speed) is 177 USD / year (27 USD for indexers, 90 USD for downloaders). The minimal recommended configuration would cost 72 USD / year (1 indexer, 1 downloader), alternatively you can ignore all the usenet stuff and run completely for free by only using deluge / torrents, although this will diminish the ease of access to content.
@@ -178,6 +180,8 @@ With the current configuration, Archivum will write the completed content to a l
 
 - Look at the example in [docker-compose.yaml](docker-compose.yaml#290) file, at the bottom, "hetzner_storage_share", this is a mounted network drive from [Hetzner Robot][Hetzner-Robot-Storage]
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Customizations
 
 ### Ports
@@ -201,6 +205,8 @@ To obfuscate the purpose of this media server a little bit, we've chosen to devi
   - Configured port: *unchanged* (default is 32400)
 - heimdall
   - Configured port:  
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
   
 #### Port forwarding
 
@@ -234,6 +240,8 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
   
 - Generate a random, human readable password:
   - `make hash.human`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 [newshosting-url]: https://www.newshosting.com/
 [frugelusenet-url]: https://frugalusenet.com/
