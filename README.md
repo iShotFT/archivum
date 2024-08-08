@@ -76,6 +76,24 @@ Pronunciation: `/ɑːrˈkɪvʊm/`
 
 Archivum serves as a fully featured pirating media server, providing users with access to a vast collection of pirated media content. The primary aim is to offer an all-in-one solution for downloading, organizing, and streaming media such as movies, TV shows, and more.
 
+## Features
+
+**Legend:**
+- ⭐: Indicates a core feature of Archivum which are otherwise often not present in similar projects
+
+- Automatic monitoring and downloading of new episodes/movies using Sonarr, Radarr and Deluge
+- Organizing and renaming downloaded content into a consistent folder structure
+- ⭐ **Automated conversion of all downloaded movies and series** to mp4 (h264, x264 / ac3) format for universal device compatibility using FFmpeg
+  - This means **no more transcoding while streaming** and native playback on all clients, limiting CPU load on the server
+- ⭐ **VPN protection for download clients** using OpenVPN or WireGuard (through Gluetun) to protect privacy and bypass ISP throttling
+- Plex media server for streaming to all devices
+- ⭐ **Reverse proxy and automated DNS updating** using DDNS-Updater and Nginx-Proxy-Manager to access media remotely from a static domain name while still supporting a dynamic IP address
+- Full overview of all running downloads, speeds and health status via the built-in web interfaces of Homarr
+- Automated fallback to Deluge (torrents) when the usenet download fails in Radarr/Sonarr
+- Full statistics monitoring of all Plex activity using Tautulli
+- Dashboard to find series & movies and automatically add their download tasks to Sonarr/Radarr using Overseerr
+- ⭐ **Automated notifications** of new downloads via Pushover
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With

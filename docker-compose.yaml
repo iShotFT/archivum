@@ -37,14 +37,16 @@ services:
       retries: 5
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
+    image: mdhiggins/sonarr-sma
     hostname: sonarr
     container_name: sonarr
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
+      - SMA_UPDATE=false # set to true if you want to have SMA updated on container launch
     volumes:
+      - sma_config:/usr/local/sma/config
       - sonarr_config:/config
       - downloads:/downloads
       - downloads_complete:/downloads_complete
@@ -61,7 +63,7 @@ services:
       retries: 5
 
   radarr:
-    image: lscr.io/linuxserver/radarr:latest
+    image: mdhiggins/radarr-sma
     hostname: radarr
     container_name: radarr
     environment:
@@ -69,6 +71,7 @@ services:
       - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
+      - sma_config:/usr/local/sma/config
       - radarr_config:/config
       - downloads:/downloads
       - downloads_complete:/downloads_complete
@@ -260,6 +263,12 @@ services:
       - archivum
 
 volumes:
+  sma_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/sma/config
   gluetun_config:
     driver: local
     driver_opts:
