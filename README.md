@@ -83,7 +83,7 @@ Archivum serves as a fully featured pirating media server, providing users with 
 
 - Automatic monitoring and downloading of new episodes/movies using Sonarr, Radarr and Deluge
 - Organizing and renaming downloaded content into a consistent folder structure
-- ⭐ **Automated conversion of all downloaded movies and series** to mp4 (h264, x264 / ac3) format for universal device compatibility using FFmpeg
+- ⭐ **Automated conversion of all downloaded movies and series** to MP4 (Video: H.264 (AVC) / Audio: AAC) format for universal device compatibility using FFmpeg
   - This means **no more transcoding while streaming** and native playback on all clients, limiting CPU load on the server
 - ⭐ **VPN protection for download clients** using OpenVPN or WireGuard (through Gluetun) to protect privacy and bypass ISP throttling
 - Plex media server for streaming to all devices
