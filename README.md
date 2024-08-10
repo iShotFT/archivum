@@ -65,6 +65,8 @@
   </ol>
 </details>
 
+<br/>
+
 <!-- ABOUT THE PROJECT -->
 # Disclaimer
 
@@ -77,9 +79,6 @@ Pronunciation: `/ɑːrˈkɪvʊm/`
 Archivum serves as a fully featured pirating media server, providing users with access to a vast collection of pirated media content. The primary aim is to offer an all-in-one solution for downloading, organizing, and streaming media such as movies, TV shows, and more.
 
 ## Features
-
-**Legend:**
-- ⭐: Indicates a core feature of Archivum which are otherwise often not present in similar projects
 
 - Automatic monitoring and downloading of new episodes/movies using Sonarr, Radarr and Deluge
 - Organizing and renaming downloaded content into a consistent folder structure
@@ -94,35 +93,50 @@ Archivum serves as a fully featured pirating media server, providing users with 
 - Dashboard to find series & movies and automatically add their download tasks to Sonarr/Radarr using Overseerr
 - ⭐ **Automated notifications** of new downloads via Pushover
 
+<div align="right">
+
+*⭐: Indicates a core feature of Archivum which are otherwise often not present in similar projects*
+
+</div>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-- [![Sonarr][Sonarr]][Sonarr-url]
-  - Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort, and rename them.
-- [![Radarr][Radarr]][Radarr-url]
-  - Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new releases of your favorite movies and will grab, sort, and rename them.
-- [![Deluge][Deluge]][Deluge-url]
-  - Deluge is a lightweight, Free Software, cross-platform BitTorrent client. It is designed to run as both a normal standalone desktop application and as a client-server.
-- [![Nginx][Nginx]][Nginx-url]
-  - Nginx Proxy Manager is a tool for managing proxy hosts, redirections, and access lists. It simplifies the management of reverse proxy settings for your services.
-- [![Homarr][Homarr]][Homarr-url]
-  - Homarr is a sleek and customizable dashboard for managing your web services. It provides a centralized interface to access all your web applications.
+- [![acme][acme]][acme-url]
+  - acme.sh is a simple, powerful, and lightweight script to automatically issue and renew SSL certificates using ACME protocol.
 - [![DDNS-Updater][DDNS-Updater]][DDNS-Updater-url]
   - DDNS-Updater is a dynamic DNS updater with support for multiple DNS services. It allows you to update your IP address and create subdomains for your home or office network.
-- [![Plex][Plex]][Plex-url]
-  - Plex is a media server that organizes your media library and streams it to any device. It provides a comprehensive solution for managing and accessing your media collection.
-- [![Overseerr][Overseerr]][Overseerr-url]
-  - Overseerr is a request management and media discovery tool for your media server. It allows your shared Plex or Emby users to request new content easily.
-- [![Prowlarr][Prowlarr]][Prowlarr-url]
-  - Prowlarr is an indexer manager/proxy built on the popular Sonarr/Radarr applications. It integrates seamlessly with your existing media management software.
-- [![Sabnzbd][Sabnzbd]][Sabnzbd-url]
-  - Sabnzbd is an Open Source Binary Newsreader written in Python. It simplifies the process of downloading from Usenet by automating the process of downloading, verifying, and extracting files.
-- [![Tautulli][Tautulli]][Tautulli-url]
-  - Tautulli is a monitoring and tracking tool for Plex Media Server. It provides detailed statistics and reports on your Plex usage and activity.
+- [![Deluge][Deluge]][Deluge-url]
+  - Deluge is a lightweight, Free Software, cross-platform BitTorrent client. It is designed to run as both a normal standalone desktop application and as a client-server.
+- [![FFMpeg][FFMpeg]][FFMpeg-url]
+  - FFMpeg is a comprehensive multimedia framework capable of decoding, encoding, transcoding, muxing, demuxing, streaming, filtering, and playing almost anything that humans and machines have created.
 - [![Gluetun][Gluetun]][Gluetun-url]
   - Gluetun is a VPN client in a lightweight Docker container, it aims to be secure, fast, and reliable with all VPN providers.
-
+- [![Homarr][Homarr]][Homarr-url]
+  - Homarr is a sleek and customizable dashboard for managing your web services. It provides a centralized interface to access all your web applications.
+- [![Home Assistant][Home Assistant]][Home Assistant-url]
+  - Home Assistant is an open-source home automation platform that focuses on privacy and local control. It can control and automate various devices in your home.
+- [![Jackett][Jackett]][Jackett-url]
+  - Jackett acts as a proxy server, allowing apps like Sonarr and Radarr to communicate with various torrent indexers and provide search results.
+- [![nginx-proxy][nginx-proxy]][nginx-proxy-url]
+  - nginx-proxy is a reverse proxy container that automatically configures itself for new containers and services using NGINX and Docker.
+- [![nzbhydra2][nzbhydra2]][nzbhydra2-url]
+  - nzbhydra2 is a meta search for NZB indexers that allows easy searching and managing of multiple NZB sources in one place.
+- [![Overseerr][Overseerr]][Overseerr-url]
+  - Overseerr is a request management and media discovery tool for your media server. It allows your shared Plex or Emby users to request new content easily.
+- [![Plex][Plex]][Plex-url]
+  - Plex is a media server that organizes your media library and streams it to any device. It provides a comprehensive solution for managing and accessing your media collection.
+- [![Prowlarr][Prowlarr]][Prowlarr-url]
+  - Prowlarr is an indexer manager/proxy built on the popular Sonarr/Radarr applications. It integrates seamlessly with your existing media management software.
+- [![Radarr][Radarr]][Radarr-url]
+  - Radarr is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new releases of your favorite movies and will grab, sort, and rename them.
+- [![Sabnzbd][Sabnzbd]][Sabnzbd-url]
+  - Sabnzbd is an Open Source Binary Newsreader written in Python. It simplifies the process of downloading from Usenet by automating the process of downloading, verifying, and extracting files.
+- [![Sonarr][Sonarr]][Sonarr-url]
+  - Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort, and rename them.
+- [![Tautulli][Tautulli]][Tautulli-url]
+  - Tautulli is a monitoring and tracking tool for Plex Media Server. It provides detailed statistics and reports on your Plex usage and activity.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -181,8 +195,7 @@ This guide is writen with a Debian (eg. WSL2) or MacOS environment in mind, we d
 
 ## Configuration
 
-### 
-
+AUTOCONFIG SCRIPT WIP
 
 ## Storage
 
@@ -231,6 +244,10 @@ Here are the port mappings being used:
   - Configured port: *unchanged* (default is 80/443)
 - tautulli
   - Configured port: 38086
+- nzbhydra2
+  - Configured port: 38087
+- jackett
+  - Configured port: 38088
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
@@ -278,27 +295,37 @@ We are forcing HTTPS connections so the 80 port is purely to catch unprotected r
 [Make-Ubuntu]: https://wiki.ubuntu.com/ubuntu-make
 [Hetzner-Robot-Storage]: https://robot.hetzner.com/storage
 [NZBFinder-url]: https://nzbfinder.ws/
-[Sonarr]: https://img.shields.io/badge/Sonarr-2D81FF?style=for-the-badge&logo=sonarr&logoColor=white
-[Sonarr-url]: https://sonarr.tv/
-[Radarr]: https://img.shields.io/badge/Radarr-2D81FF?style=for-the-badge&logo=radarr&logoColor=white
-[Radarr-url]: https://radarr.video/
-[Deluge]: https://img.shields.io/badge/Deluge-2D81FF?style=for-the-badge&logo=deluge&logoColor=white
-[Deluge-url]: https://deluge-torrent.org/
-[Nginx]: https://img.shields.io/badge/Nginx-269539?style=for-the-badge&logo=nginx&logoColor=white
-[Nginx-url]: https://nginx.org/
-[Homarr]: https://img.shields.io/badge/Homarr-3D3D3D?style=for-the-badge&logo=homarr&logoColor=white
-[Homarr-url]: https://github.com/ajnart/homarr
+[acme]: https://img.shields.io/badge/acme.sh-000000?style=for-the-badge&logo=letsencrypt&logoColor=white
+[acme-url]: https://github.com/acmesh-official/acme.sh
 [DDNS-Updater]: https://img.shields.io/badge/DDNS--Updater-000000?style=for-the-badge&logo=ddns-updater&logoColor=white
 [DDNS-Updater-url]: https://github.com/qdm12/ddns-updater
-[Plex]: https://img.shields.io/badge/Plex-E5A00D?style=for-the-badge&logo=plex&logoColor=white
-[Plex-url]: https://www.plex.tv/
-[Overseerr]: https://img.shields.io/badge/Overseerr-5A67D8?style=for-the-badge&logo=overseerr&logoColor=white
-[Overseerr-url]: https://overseerr.dev/
-[Prowlarr]: https://img.shields.io/badge/Prowlarr-FF5E5B?style=for-the-badge&logo=prowlarr&logoColor=white
-[Prowlarr-url]: https://prowlarr.com/
-[Sabnzbd]: https://img.shields.io/badge/Sabnzbd-F29111?style=for-the-badge&logo=sabnzbd&logoColor=white
-[Sabnzbd-url]: https://sabnzbd.org/
-[Tautulli]: https://img.shields.io/badge/Tautulli-00A9E0?style=for-the-badge&logo=tautulli&logoColor=white
-[Tautulli-url]: https://tautulli.com/
+[Deluge]: https://img.shields.io/badge/Deluge-2D81FF?style=for-the-badge&logo=deluge&logoColor=white
+[Deluge-url]: https://deluge-torrent.org/
+[FFMpeg]: https://img.shields.io/badge/FFMpeg-007808?style=for-the-badge&logo=ffmpeg&logoColor=white
+[FFMpeg-url]: https://ffmpeg.org/
 [Gluetun]: https://img.shields.io/badge/Gluetun-00A9E0?style=for-the-badge&logo=gluetun&logoColor=white
 [Gluetun-url]: https://github.com/qdm12/gluetun
+[Homarr]: https://img.shields.io/badge/Homarr-3D3D3D?style=for-the-badge&logo=homarr&logoColor=white
+[Homarr-url]: https://github.com/ajnart/homarr
+[Home Assistant]: https://img.shields.io/badge/Home_Assistant-41BDF5?style=for-the-badge&logo=home-assistant&logoColor=white
+[Home Assistant-url]: https://www.home-assistant.io/
+[Jackett]: https://img.shields.io/badge/Jackett-F47521?style=for-the-badge&logo=jackett&logoColor=white
+[Jackett-url]: https://github.com/Jackett/Jackett
+[nginx-proxy]: https://img.shields.io/badge/nginx--proxy-269539?style=for-the-badge&logo=nginx&logoColor=white
+[nginx-proxy-url]: https://github.com/nginx-proxy/nginx-proxy
+[nzbhydra2]: https://img.shields.io/badge/nzbhydra2-00599C?style=for-the-badge&logo=hydra&logoColor=white
+[nzbhydra2-url]: https://github.com/theotherp/nzbhydra2
+[Overseerr]: https://img.shields.io/badge/Overseerr-5A67D8?style=for-the-badge&logo=overseerr&logoColor=white
+[Overseerr-url]: https://overseerr.dev/
+[Plex]: https://img.shields.io/badge/Plex-E5A00D?style=for-the-badge&logo=plex&logoColor=white
+[Plex-url]: https://www.plex.tv/
+[Prowlarr]: https://img.shields.io/badge/Prowlarr-FF5E5B?style=for-the-badge&logo=prowlarr&logoColor=white
+[Prowlarr-url]: https://prowlarr.com/
+[Radarr]: https://img.shields.io/badge/Radarr-2D81FF?style=for-the-badge&logo=radarr&logoColor=white
+[Radarr-url]: https://radarr.video/
+[Sabnzbd]: https://img.shields.io/badge/Sabnzbd-F29111?style=for-the-badge&logo=sabnzbd&logoColor=white
+[Sabnzbd-url]: https://sabnzbd.org/
+[Sonarr]: https://img.shields.io/badge/Sonarr-2D81FF?style=for-the-badge&logo=sonarr&logoColor=white
+[Sonarr-url]: https://sonarr.tv/
+[Tautulli]: https://img.shields.io/badge/Tautulli-00A9E0?style=for-the-badge&logo=tautulli&logoColor=white
+[Tautulli-url]: https://tautulli.com/

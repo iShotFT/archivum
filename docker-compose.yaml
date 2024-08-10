@@ -4,6 +4,8 @@ services:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
     environment:
+      - VIRTUAL_HOST=sabnzbd.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=sabnzbd.${DOMAIN_NAME}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -14,11 +16,16 @@ services:
       - hetzner_storage_share:/hetzner-storage
     restart: unless-stopped
     network_mode: "service:gluetun"
+    depends_on:
+      acme:
+        condition: service_healthy
 
   deluge:
     image: lscr.io/linuxserver/deluge:latest
     container_name: deluge
     environment:
+      - VIRTUAL_HOST=deluge.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=deluge.${DOMAIN_NAME}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -35,12 +42,18 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      acme:
+        condition: service_healthy
 
   sonarr:
     image: mdhiggins/sonarr-sma
     hostname: sonarr
     container_name: sonarr
     environment:
+      - VIRTUAL_HOST=sonarr.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=sonarr.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_SONARR}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -52,7 +65,7 @@ services:
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
     expose:
-      - 38082
+      - ${PORT_SONARR}
     restart: unless-stopped
     networks:
       - archivum
@@ -61,12 +74,18 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      acme:
+        condition: service_healthy
 
   radarr:
     image: mdhiggins/radarr-sma
     hostname: radarr
     container_name: radarr
     environment:
+      - VIRTUAL_HOST=radarr.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=radarr.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_RADARR}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -77,7 +96,7 @@ services:
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
     expose:
-      - 38083
+      - ${PORT_RADARR}
     restart: unless-stopped
     networks:
       - archivum
@@ -86,12 +105,18 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      acme:
+        condition: service_healthy
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     hostname: prowlarr
     container_name: prowlarr
     environment:
+      - VIRTUAL_HOST=prowlarr.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=prowlarr.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_PROWLARR}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -100,23 +125,29 @@ services:
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
     expose:
-      - 38084
+      - ${PORT_PROWLARR}
     restart: unless-stopped
     networks:
       - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
 
   overseerr:
     image: sctx/overseerr:latest
     hostname: overseerr
     container_name: overseerr
     environment:
+      - VIRTUAL_HOST=request.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=request.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_OVERSEERR}
       - LOG_LEVEL=debug
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
-      - PORT=38085
+      - PORT=${PORT_OVERSEERR}
     expose:
-      - 38085
+      - ${PORT_OVERSEERR}
     volumes:
       - overseerr_config:/app/config
       - downloads_complete:/downloads_complete
@@ -125,6 +156,8 @@ services:
     networks:
       - archivum
     depends_on:
+      acme:
+        condition: service_healthy
       deluge:
         condition: service_healthy
       sonarr:
@@ -139,6 +172,9 @@ services:
     env_file:
       - ./.env
     environment:
+      - VIRTUAL_HOST=plex.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=plex.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_PLEX}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -149,47 +185,139 @@ services:
       - downloads_complete:/downloads_complete
       - hetzner_storage_share:/hetzner-storage
     ports:
-      - 32400:32400
+      - ${PORT_PLEX}:${PORT_PLEX}
     restart: unless-stopped
     networks:
       - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
 
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     hostname: tautulli
     container_name: tautulli
     environment:
+      - VIRTUAL_HOST=tautulli.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=tautulli.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_TAUTULLI}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
     volumes:
       - tautulli_config:/config
     expose:
-      - 8181
+      - ${PORT_TAUTULLI}
     restart: unless-stopped
     networks:
       - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
+
+  nzbhydra2:
+    image: lscr.io/linuxserver/nzbhydra2:latest
+    hostname: nzbhydra2
+    container_name: nzbhydra2
+    environment:
+      - VIRTUAL_HOST=hydra.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=hydra.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_HYDRA}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - nzbhydra2_config:/config
+      - downloads:/downloads
+      - downloads_complete:/downloads_complete
+    expose:
+      - ${PORT_HYDRA}
+    restart: unless-stopped
+    networks:
+      - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    hostname: jackett
+    container_name: jackett
+    environment:
+      - VIRTUAL_HOST=jackett.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=jackett.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_JACKETT}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - AUTO_UPDATE=true #optional
+    volumes:
+      - jackett_config:/config
+      - downloads:/downloads
+      - downloads_complete:/downloads_complete
+    expose:
+      - ${PORT_JACKETT}
+    restart: unless-stopped
+    networks:
+      - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
 
   homarr:
     image: ghcr.io/ajnart/homarr:latest
     hostname: homarr
     container_name: homarr
+    environment:
+      - VIRTUAL_HOST=overview.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=overview.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_HOMARR}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
       - homarr_config:/app/data/configs
       - homarr_icons:/app/public/icons
       - homarr_data:/data
-    ports:
-      - 7575:7575
+    expose:
+      - ${PORT_HOMARR}
     restart: unless-stopped
     networks:
       - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
+
+  james:
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    hostname: james
+    container_name: james
+    environment:
+      - VIRTUAL_HOST=james.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=james.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_JAMES}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - james_config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    expose:
+      - ${PORT_JAMES}
+    restart: unless-stopped
+    networks:
+      - archivum
+    depends_on:
+      acme:
+        condition: service_healthy
 
   ddns:
     image: qmcgaw/ddns-updater
     hostname: ddns
     container_name: ddns
     environment:
+      - VIRTUAL_HOST=ddns.${DOMAIN_NAME}
+      - LETSENCRYPT_HOST=ddns.${DOMAIN_NAME}
+      - VIRTUAL_PORT=${PORT_DDNS}
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TIMEZONE}
@@ -203,7 +331,7 @@ services:
       - PUBLICIP_DNS_PROVIDERS=all
       - PUBLICIP_DNS_TIMEOUT=3s
       - HTTP_TIMEOUT=10s
-      - LISTENING_ADDRESS=:8000
+      - LISTENING_ADDRESS=:${PORT_DDNS}
       - ROOT_URL=/
       - BACKUP_PERIOD=0
       - BACKUP_DIRECTORY=/updater/data
@@ -213,26 +341,67 @@ services:
     volumes:
       - ddns_config:/updater/data
     expose:
-      - 8000
+      - ${PORT_DDNS}
     restart: unless-stopped
     networks:
       - archivum
-
-  proxy:
-    image: 'jc21/nginx-proxy-manager:latest'
-    hostname: proxy
-    container_name: proxy
+    depends_on:
+      acme:
+        condition: service_healthy
+  
+  nginx:
+    image: 'nginxproxy/nginx-proxy:latest'
+    hostname: nginx
+    container_name: nginx
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - DEFAULT_EMAIL=${DOMAIN_EMAIL}
     volumes:
-      - proxy_data:/data
-      - proxy_letsencrypt:/etc/letsencrypt
+      - /var/run/docker.sock:/tmp/docker.sock:ro # Required, share your docker socket with this container so it can extract context
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - ${PWD}/storage/nginx/data/network_internal.conf:/etc/nginx/network_internal.conf
     ports:
       - '80:80'
-      - '81:81'
       - '443:443'
     restart: unless-stopped
     networks:
-      - archivum
+      archivum:
+       ipv4_address: 172.18.0.10
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status", "||", "exit", "1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
 
+  acme:
+    image: 'nginxproxy/acme-companion:latest'
+    hostname: acme
+    container_name: acme
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - DEFAULT_EMAIL=${DOMAIN_EMAIL}
+      - TRUST_DOWNSTREAM_PROXY=false
+    volumes_from:
+      - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Required, share your docker socket with this container so it can extract context
+      - acme:/etc/acme.sh
+    restart: unless-stopped
+    networks:
+      - archivum
+    healthcheck:
+      test: ["CMD", "/app/cert_status", "||", "exit", "1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      nginx:
+        condition: service_healthy
   gluetun:
     image: qmcgaw/gluetun
     hostname: gluetun
@@ -249,18 +418,28 @@ services:
     volumes:
       - gluetun_config:/gluetun
     environment:
-      - VPN_SERVICE_PROVIDER=${OPENVPN_PROVIDER}
-      - VPN_TYPE=openvpn
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Germany
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TIMEZONE}
-      - UPDATER_PERIOD=24h
+      VIRTUAL_HOST_MULTIPORTS: |-
+        sabnzbd.${DOMAIN_NAME}:
+          "/":
+            port: 38080
+        deluge.${DOMAIN_NAME}:
+          "/":
+            port: 38081
+      VPN_SERVICE_PROVIDER: ${OPENVPN_PROVIDER}
+      VPN_TYPE: openvpn
+      OPENVPN_USER: ${OPENVPN_USER}
+      OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
+      SERVER_COUNTRIES: 'Germany'
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TIMEZONE}
+      UPDATER_PERIOD: '24h'
     restart: unless-stopped
     networks:
       - archivum
+    depends_on:
+      nginx:
+        condition: service_healthy
 
 volumes:
   sma_config:
@@ -269,6 +448,24 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/storage/sma/config
+  nzbhydra2_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/nzbhydra2/config
+  jackett_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/jackett/config
+  james_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/james/config
   gluetun_config:
     driver: local
     driver_opts:
@@ -371,6 +568,30 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/storage/proxy/letsencrypt
+  nginx_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/nginx/data
+  certs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/certs
+  html:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/html
+  acme:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/storage/acme
   hetzner_storage_share:
     driver_opts:
       type: cifs
@@ -379,3 +600,9 @@ volumes:
 networks:
   archivum:
     driver: 'bridge'
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.0.0/24
